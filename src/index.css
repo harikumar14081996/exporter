@@ -391,6 +391,59 @@ section {
   .grid-4 {
     grid-template-columns: 1fr;
   }
+
+  .btn {
+    padding: 0.875rem 1.25rem;
+    min-height: 44px;
+  }
+
+  section {
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --container-padding: 0.75rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+  }
+
+  .btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+
+  .card-body {
+    padding: var(--spacing-sm);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .section-title::after {
+    width: 60px;
+    height: 3px;
+  }
 }
 
 /* Loading States */

@@ -163,5 +163,25 @@
 @media (max-width: 480px) {
     .stats-grid {
         grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+
+    .stat-item {
+        min-height: 120px;
+        padding: var(--spacing-sm);
+        flex-direction: row;
+        gap: var(--spacing-md);
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .stat-value {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
     }
 }

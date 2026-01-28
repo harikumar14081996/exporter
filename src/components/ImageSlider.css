@@ -234,3 +234,51 @@
         width: 30px;
     }
 }
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .slider-container {
+        height: 400px;
+    }
+
+    .slide-content {
+        padding: 0 0.75rem;
+    }
+
+    .slide-subtitle {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .slide-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 1rem;
+    }
+
+    .slide-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .slide-cta {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .slider-arrow {
+        display: none;
+    }
+
+    .slider-dots {
+        bottom: 1rem;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .dot.active {
+        width: 24px;
+    }
+}

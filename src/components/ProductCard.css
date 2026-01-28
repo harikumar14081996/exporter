@@ -156,3 +156,33 @@
         font-size: 1.25rem;
     }
 }
+
+@media (max-width: 480px) {
+    .product-card {
+        padding: 1.25rem;
+    }
+
+    .icon-wrapper {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+
+    .product-card-title {
+        font-size: 1.1rem;
+    }
+
+    .product-card-description {
+        font-size: 0.9rem;
+    }
+
+    .product-card-link {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .product-card-category {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
