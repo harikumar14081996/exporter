@@ -88,3 +88,54 @@
     color: var(--text-light);
     margin-bottom: 2rem;
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .category-products-page {
+        padding-top: 70px;
+    }
+
+    .category-hero {
+        padding: 2rem 0;
+    }
+
+    .category-title {
+        font-size: 2rem;
+    }
+
+    .breadcrumbs {
+        font-size: 0.85rem;
+    }
+
+    .category-content {
+        padding: 2rem 0.75rem;
+    }
+
+    .no-products {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-products-page {
+        padding-top: 56px;
+    }
+
+    .category-hero {
+        padding: 1.5rem 0;
+    }
+
+    .category-title {
+        font-size: 1.5rem;
+    }
+
+    .breadcrumbs {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .category-content {
+        padding: 1.5rem 0.5rem;
+    }
+}

@@ -1,5 +1,7 @@
 .quote-page {
     min-height: 100vh;
+    padding-top: 80px;
+    /* Account for fixed navbar */
 }
 
 .quote-content-section {
@@ -89,6 +91,7 @@
     gap: 0.5rem;
     color: rgba(255, 255, 255, 0.95);
     margin: 0;
+    word-break: break-word;
 }
 
 .contact-item strong {
@@ -139,5 +142,70 @@
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .quote-page {
+        padding-top: 70px;
+    }
+
+    .quote-content-section {
+        padding: var(--spacing-xl) 0;
+    }
+
+    .quote-info-column h2,
+    .quote-form-column h2 {
+        font-size: 1.5rem;
+    }
+
+    .quote-form-wrapper {
+        padding: var(--spacing-lg);
+    }
+
+    .benefit-item {
+        padding: var(--spacing-sm);
+    }
+
+    .benefit-item:hover {
+        transform: none;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+    }
+
+    .contact-box {
+        padding: var(--spacing-md);
+    }
+
+    .contact-box h3 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-page {
+        padding-top: 56px;
+    }
+
+    .quote-info-column h2,
+    .quote-form-column h2 {
+        font-size: 1.25rem;
+    }
+
+    .quote-form-wrapper {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+
+    .benefit-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .benefit-icon {
+        font-size: 2.5rem;
     }
 }
