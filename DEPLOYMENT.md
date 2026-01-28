@@ -74,7 +74,7 @@ Expand the **Environment Variables** section and add the following.
 | `VITE_API_URL` | `/` | **Critical**: Sets API calls to relative path so they hit your own backend |
 | `JWT_SECRET` | `any_long_random_string` | For admin sessions |
 | `SUPER_ADMIN_PASSWORD` | `YourSecretPass` | For super admin actions |
-| `CORS_ORIGIN` | `https://YOUR_VERCEL_PROJECT_URL.vercel.app` | (Optional) Restricts API access |
+| `CORS_ORIGIN` | `https://your-project.vercel.app` | **Optional**: The full URL of your frontend. My code now allows all `*.vercel.app` domains automatically, so you can skip this if using Vercel. |
 
 > **Note on VITE_API_URL**: Setting this to `/` is the best practice for this setup. The request `DELETE /api/products/1` will automatically go to your backend Serverless Function because of the rule we added in `vercel.json` (`/api/(.*)` -> `backend/server.js`).
 
