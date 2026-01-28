@@ -1,0 +1,7 @@
+/* Product Management Specific Styles */
+/* Most styles are shared from CategoryManagementPage.css and AdminLayout.css */
+
+.status-badge {
+    display: inline-block;
+    font-weight: 600;
+}

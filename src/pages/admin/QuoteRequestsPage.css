@@ -1,0 +1,56 @@
+.quote-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.detail-row {
+    margin-bottom: 0.5rem;
+}
+
+.detail-row.full-width {
+    grid-column: 1 / -1;
+}
+
+.message-box {
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    margin-top: 0.5rem;
+    white-space: pre-wrap;
+}
+
+.status-select {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.status-select.new {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+.status-select.pending {
+    background-color: #fff7ed;
+    color: #c2410c;
+}
+
+.status-select.contacted {
+    background-color: #f0fdf4;
+    color: #15803d;
+}
+
+.status-select.processed {
+    background-color: #ecfccb;
+    color: #3f6212;
+}
+
+.status-select.closed {
+    background-color: #f3f4f6;
+    color: #374151;
+}

@@ -1,0 +1,68 @@
+.cms-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: white;
+    color: var(--primary);
+    border-top: 2px solid var(--primary);
+    margin-bottom: -1px;
+    z-index: 10;
+}
+
+.cms-content {
+    border-top-left-radius: 0;
+    padding: 2rem;
+}
+
+.tab-content {
+    max-width: 800px;
+}
+
+.notification-badge {
+    background-color: #dcfce7;
+    color: #16a34a;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.full-width-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.info-box {
+    background-color: #eff6ff;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    color: #1e40af;
+    font-size: 0.9rem;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
