@@ -21,7 +21,11 @@ const Stats = () => {
         const fetchStats = async () => {
             try {
                 const data = await apiService.getStats();
-                setStats(data);
+                if (Array.isArray(data)) {
+                    setStats(data);
+                } else {
+                    throw new Error('Stats data is not an array');
+                }
             } catch (error) {
                 console.error('Error fetching stats:', error);
                 // Fallback to default stats
