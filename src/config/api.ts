@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Use relative path for production (Vercel) to let rewrites handle it
+const API_BASE_URL = import.meta.env.VITE_API_URL === '/' ? '' : (import.meta.env.VITE_API_URL || 'http://localhost:3001');
 
 export const config = {
     apiBaseUrl: API_BASE_URL,
