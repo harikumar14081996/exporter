@@ -24,19 +24,25 @@ const AdminLoginPage = () => {
                 body: JSON.stringify({ username, password }),
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
-                // Store token and redirect
-                localStorage.setItem('adminToken', data.token);
-                localStorage.setItem('adminUser', JSON.stringify(data.admin));
-                navigate('/admin/dashboard');
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('adminToken', data.token);
+                    localStorage.setItem('adminUser', JSON.stringify(data.admin));
+                    navigate('/admin/dashboard');
+                } else {
+                    setError(data.error || 'Login failed');
+                }
             } else {
-                setError(data.error || 'Login failed');
+                // Handle non-JSON response (likely Vercel 500/404 HTML/Text)
+                const text = await response.text();
+                console.error('Non-JSON response:', text);
+                setError(`Server Error (${response.status}): ${response.statusText}`);
             }
         } catch (err) {
             console.error('Login error:', err);
-            setError('Connection failed. Please check server.');
+            setError('Connection failed. Network error or Server crashed.');
         } finally {
             setLoading(false);
         }
