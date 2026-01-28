@@ -3,7 +3,8 @@ import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [adminUser, setAdminUser] = useState<any>(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -26,10 +27,39 @@ const AdminLayout = () => {
         }
     }, [navigate]);
 
+    // Handle window resize
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth <= 768;
+            setIsMobile(mobile);
+            if (!mobile) {
+                setSidebarOpen(true); // Open sidebar on desktop
+            } else {
+                setSidebarOpen(false); // Close sidebar on mobile by default
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Set initial state
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminUser');
         navigate('/admin/login');
+    };
+
+    const handleNavClick = () => {
+        // Close sidebar on mobile when clicking a nav item
+        if (isMobile) {
+            setSidebarOpen(false);
+        }
+    };
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
     };
 
     const navItems = [
@@ -46,6 +76,14 @@ const AdminLayout = () => {
 
     return (
         <div className="admin-layout">
+            {/* Mobile Overlay */}
+            {isMobile && (
+                <div
+                    className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`}
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
             <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
                 <div className="sidebar-header">
@@ -58,6 +96,7 @@ const AdminLayout = () => {
                             key={item.path}
                             to={item.path}
                             className={`sidebar-link ${location.pathname.startsWith(item.path) ? 'active' : ''}`}
+                            onClick={handleNavClick}
                         >
                             <span className="link-icon">{item.icon}</span>
                             <span className="link-text">{item.name}</span>
@@ -81,7 +120,8 @@ const AdminLayout = () => {
                 <header className="admin-header">
                     <button
                         className="sidebar-toggle"
-                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                        onClick={toggleSidebar}
+                        aria-label="Toggle sidebar"
                     >
                         ☰
                     </button>
