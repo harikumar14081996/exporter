@@ -18,8 +18,18 @@ const HomePage = () => {
                     apiService.getInstruments(),
                 ]);
 
-                setSpecializations(specializationsData.map((item: any) => item.title));
-                setInstruments(instrumentsData);
+
+                if (Array.isArray(specializationsData)) {
+                    setSpecializations(specializationsData.map((item: any) => item.title));
+                } else {
+                    throw new Error('Specializations data is not an array');
+                }
+
+                if (Array.isArray(instrumentsData)) {
+                    setInstruments(instrumentsData);
+                } else {
+                    throw new Error('Instruments data is not an array');
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
                 // Fallback to default data

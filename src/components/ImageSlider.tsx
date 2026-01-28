@@ -20,7 +20,14 @@ const ImageSlider = () => {
         const fetchSliders = async () => {
             try {
                 const data = await apiService.getSliders();
-                setSlides(data);
+                if (Array.isArray(data)) {
+                    setSlides(data);
+                } else {
+                    console.error('Sliders data is not an array:', data);
+                    // Fallback logic will handle empty state, or stay empty
+                    setSlides([]);
+                    throw new Error('Invalid data format'); // Trigger catch block for fallback
+                }
             } catch (error) {
                 console.error('Error fetching sliders:', error);
                 // Use default fallback slides on error

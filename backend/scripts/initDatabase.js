@@ -11,6 +11,7 @@ const pool = new Pool({
     database: process.env.DB_NAME || 'pharma_db',
     user: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
+    ssl: process.env.DB_HOST !== 'localhost' ? { rejectUnauthorized: false } : false
 });
 
 async function initializeDatabase() {
