@@ -69,8 +69,11 @@ function App() {
     // Increment visitor count
     const recordVisit = async () => {
       try {
-        // Simple direct call to avoid circular dependency issues or just use fetch
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        // Use same URL logic as config/api.ts - relative path in production
+        const envApiUrl = import.meta.env.VITE_API_URL;
+        const API_URL = (envApiUrl && envApiUrl.trim().startsWith('http'))
+          ? envApiUrl
+          : (import.meta.env.PROD ? '' : 'http://localhost:3001');
         await fetch(`${API_URL}/api/visit`, { method: 'POST' });
       } catch (e) {
         console.error('Failed to record visit');
