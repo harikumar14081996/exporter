@@ -45,8 +45,9 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
 ║   🏥 SR Pharmagical Exporter - Backend Server            ║
@@ -63,7 +64,8 @@ app.listen(PORT, () => {
 ║   🔧 Health Check: http://localhost:${PORT}/health         ║
 ║                                                           ║
 ╚═══════════════════════════════════════════════════════════╝
-    `);
-});
+        `);
+    });
+}
 
 module.exports = app;

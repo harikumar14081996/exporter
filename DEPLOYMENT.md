@@ -1,245 +1,112 @@
-# Deployment Guide - SR Pharmagical Exporter
+# SR Pharmagical Exporter - Deployment Guide
 
-## 🚀 Quick Deploy to Vercel
+This guide explains how to deploy the SR Pharmagical Exporter application. We will use **Vercel** for the Full Stack application (Frontend + Backend) and **Neon** for the PostgreSQL Database.
 
-### Prerequisites
-- [Vercel account](https://vercel.com/signup) (free)
-- [GitHub account](https://github.com/signup) (free)
-- Git installed on your computer
+## Prerequisites
 
----
-
-## Option 1: Deploy via Vercel CLI (Fastest)
-
-### Step 1: Install Vercel CLI
-```bash
-npm install -g vercel
-```
-
-### Step 2: Navigate to Project
-```bash
-cd /Users/harikumarpatel/Pharma
-```
-
-### Step 3: Deploy
-```bash
-vercel
-```
-
-### Step 4: Follow Prompts
-- Login to Vercel (opens browser)
-- Confirm project settings
-- Wait for deployment
-
-**Done!** Your site will be live at a Vercel URL (e.g., `https://sr-pharmagical-exporter.vercel.app`)
+1.  **GitHub Account**: Your code must be pushed to a GitHub repository.
+2.  **Vercel Account**: Sign up at [vercel.com](https://vercel.com).
+3.  **Neon Account**: Sign up at [neon.tech](https://neon.tech).
 
 ---
 
-## Option 2: Deploy via Vercel Dashboard (Most Common)
+## Part 1: Database Setup (Neon)
+
+Neon is a serverless PostgreSQL provider that works perfectly with Vercel.
+
+### Step 1: Create a Project
+1.  Log in to the [Neon Console](https://console.neon.tech).
+2.  Click **"New Project"**.
+3.  Name it (e.g., `pharma-exporter`).
+4.  Choose a region close to you (e.g., `US East (N. Virginia)`).
+5.  Click **Create Project**.
+
+### Step 2: Get Connection Details
+1.  Once created, you will see a **Connection String** on the dashboard.
+2.  It looks like this: `postgres://neondb_owner:AbCd123...@ep-cool-frog-123456.us-east-2.aws.neon.tech/neondb?sslmode=require`
+3.  **Copy this string**. You will need it for Vercel environment variables.
+
+### Step 3: Initialize the Database
+You need to create the tables in your new Neon database.
+
+1.  Open the **"SQL Editor"** in the Neon Dashboard sidebar.
+2.  Open your local file: `backend/schema.sql`.
+3.  Copy the entire content of `schema.sql`.
+4.  Paste it into the Neon SQL Editor.
+5.  Click **Run**.
+6.  You should see success messages (tables created).
+
+---
+
+## Part 2: Deploying to Vercel
+
+We will deploy both the React Frontend and the Express Backend to Vercel in a single project.
 
 ### Step 1: Push to GitHub
+Ensure all your latest code is pushed to your GitHub repository.
 
-```bash
-# Initialize git repository
-cd /Users/harikumarpatel/Pharma
-git init
+### Step 2: Import Project to Vercel
+1.  Go to your [Vercel Dashboard](https://vercel.com/dashboard).
+2.  Click **"Add New..."** -> **"Project"**.
+3.  Find your `exporter` repository and click **Import**.
 
-# Add all files
-git add .
+### Step 3: Configure Project
+Vercel should automatically detect that this is a **Vite** project.
 
-# Commit
-git commit -m "Initial commit - SR Pharmagical Exporter website"
+*   **Project Name**: `sr-pharmagical-exporter` (or similar)
+*   **Framework Preset**: `Vite` (Leave as is)
+*   **Root Directory**: `./` (Leave as is)
+*   **Build Command**: `npm run build` (Leave as is)
+*   **Output Directory**: `dist` (Leave as is)
 
-# Create new repo on GitHub first, then:
-git remote add origin https://github.com/YOUR_USERNAME/sr-pharmagical-exporter.git
-git branch -M main
-git push -u origin main
-```
+### Step 4: Environment Variables (Crucial!)
+Expand the **Environment Variables** section and add the following.
+**IMPORTANT**: Get the Database details from your Neon Connection String.
+*Example String*: `postgres://[USER]:[PASSWORD]@[HOST]/[DBNAME]?sslmode=require`
 
-### Step 2: Import to Vercel
+| Variable Name | Value | Description |
+| :--- | :--- | :--- |
+| `DB_USER` | `neondb_owner` (from Neon) | Database User |
+| `DB_PASSWORD` | `AbCd123...` (from Neon) | Database Password |
+| `DB_HOST` | `ep-xyz...neon.tech` (from Neon) | Database Host |
+| `DB_NAME` | `neondb` (from Neon) | Database Name |
+| `DB_PORT` | `5432` | Database Port |
+| `VITE_API_URL` | `/` | **Critical**: Sets API calls to relative path so they hit your own backend |
+| `JWT_SECRET` | `any_long_random_string` | For admin sessions |
+| `SUPER_ADMIN_PASSWORD` | `YourSecretPass` | For super admin actions |
+| `CORS_ORIGIN` | `https://YOUR_VERCEL_PROJECT_URL.vercel.app` | (Optional) Restricts API access |
 
-1. Go to [vercel.com](https://vercel.com)
-2. Click **"New Project"**
-3. Click **"Import Git Repository"**
-4. Select your GitHub repo
-5. **Project settings** (auto-detected):
-   - Framework Preset: **Vite**
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install`
-6. Click **"Deploy"**
+> **Note on VITE_API_URL**: Setting this to `/` is the best practice for this setup. The request `DELETE /api/products/1` will automatically go to your backend Serverless Function because of the rule we added in `vercel.json` (`/api/(.*)` -> `backend/server.js`).
 
-### Step 3: Wait for Build
-
-- Vercel will build your project (~1-2 minutes)
-- You'll see a preview of your site
-- Click the URL to view your live site!
-
----
-
-## Configure Custom Domain
-
-### Step 1: Add Domain in Vercel
-
-1. Go to your project in Vercel
-2. Click **"Settings"** → **"Domains"**
-3. Enter `srpharmagicalexporter.com`
-4. Click **"Add"**
-
-### Step 2: Update DNS Settings
-
-Vercel will provide DNS records. Add to your domain registrar:
-
-**For Apex Domain (srpharmagicalexporter.com)**:
-```
-Type: A
-Name: @
-Value: 76.76.21.21
-```
-
-**For WWW Subdomain**:
-```
-Type: CNAME
-Name: www
-Value: cname.vercel-dns.com
-```
-
-### Step 3: Wait for Propagation
-
-- DNS changes take 5 minutes to 48 hours
-- Vercel automatically provisions SSL certificate
-- Your site will be live at `https://srpharmagicalexporter.com`
+### Step 5: Deploy
+1.  Click **Deploy**.
+2.  Vercel will:
+    *   Build the Frontend (Vite).
+    *   Build the Backend (Serverless Function).
+3.  Wait for the "Congratulations!" screen.
 
 ---
 
-## Environment Setup (if needed later)
+## Part 3: Verify & Troubleshoot
 
-If you add environment variables (e.g., for form backend):
+### Verify
+1.  Click the screenshot image to open your new site.
+2.  The homepage should load products from your Neon database.
+3.  Go to `/admin/login` and try to log in.
 
-1. Go to Vercel project → **Settings** → **Environment Variables**
-2. Add variables:
-   - Production
-   - Preview
-   - Development
-3. Redeploy for changes to take effect
+### Troubleshooting
+*   **"Connection Refused" / Database errors**:
+    *   Check your `DB_PASSWORD` and `DB_HOST` in Vercel Settings.
+    *   Redeploy if you change environment variables.
+*   **API returns 404**:
+    *   Check `vercel.json` in your repository root. It must have the `routes` configuration to rewrite `/api/*` to `backend/server.js`.
+*   **API returns 500**:
+    *   Go to Vercel Dashboard -> Project -> **Logs**.
+    *   Filter by **Functions**.
+    *   You will see the backend error logs there (e.g., "password authentication failed").
 
----
-
-## Automatic Deployments
-
-Once connected to GitHub, Vercel automatically:
-- ✅ Deploys on every push to `main` branch
-- ✅ Creates preview deployments for pull requests
-- ✅ Shows deployment status in GitHub
-
----
-
-## Build Commands Reference
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build locally
-npm run preview
-
-# Type check
-npm run type-check
-```
-
----
-
-## Troubleshooting
-
-### Build Fails
-
-**Check:**
-- All dependencies in `package.json`
-- Node version (Vercel uses 18.x)
-- Build logs in Vercel dashboard
-
-**Fix:**
-```bash
-# Clean install locally
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
-
-### Site Not Loading
-
-**Check:**
-- Build successful in Vercel dashboard
-- DNS settings if using custom domain
-- Browser cache (try incognito mode)
-
-### Styles Missing
-
-**Check:**
-- All CSS files imported correctly
-- Build output includes CSS files
-- No console errors in browser
-
----
-
-## Performance Optimization
-
-Vercel automatically provides:
-- ✅ Global CDN
-- ✅ Automatic HTTPS
-- ✅ Image optimization
-- ✅ Gzip compression
-- ✅ Edge caching
-
-**Your site will load in < 1 second worldwide!**
-
----
-
-## Monitoring & Analytics
-
-### Add Vercel Analytics (Optional)
-
-1. Go to project → **Analytics** tab
-2. Click **"Enable Analytics"**
-3. Get insights on:
-   - Page views
-   - Visitor countries
-   - Device types
-   - Performance metrics
-
----
-
-## 📋 Deployment Checklist
-
-Before deploying, verify:
-
-- [ ] All content is correct and reviewed
-- [ ] Contact information updated (phone, email, address)
-- [ ] SEO meta tags present
-- [ ] No console errors in browser
-- [ ] Tested on mobile devices
-- [ ] Forms working (if backend added)
-- [ ] Links point to correct destinations
-- [ ] Images optimized (if replaced)
-
----
-
-## Support Resources
-
-- [Vercel Documentation](https://vercel.com/docs)
-- [Vite Documentation](https://vitejs.dev)
-- [React Documentation](https://react.dev)
-
----
-
-## 🎉 You're Ready to Deploy!
-
-The website is **complete and production-ready**. Choose your deployment method above and you'll be live in minutes!
-
-**Need help?** All code is well-documented and follows best practices.
+### Updating the Site
+Whenever you want to update the site:
+1.  Make changes locally.
+2.  `git add .`, `git commit -m "update"`, `git push`.
+3.  Vercel will automatically redeploy.
