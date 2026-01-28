@@ -149,6 +149,7 @@
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transform: translateY(-150%);
         transition: transform 0.3s ease;
+        z-index: 999;
     }
 
     .navbar-menu.active {
@@ -174,12 +175,12 @@
         display: block;
         transform: none;
     }
-    
+
     .nav-item-dropdown {
         width: 100%;
         text-align: center;
     }
-    
+
     .dropdown-toggle {
         justify-content: center;
         width: 100%;
