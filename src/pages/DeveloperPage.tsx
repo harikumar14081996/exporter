@@ -131,6 +131,32 @@ const DeveloperPage = () => {
                                         </ul>
                                     </div>
                                 </div>
+
+                                <div className="developer-section">
+                                    <h4>Core Competencies</h4>
+                                    <div className="competencies-grid">
+                                        <div className="competency-item">
+                                            <span className="competency-icon">💻</span>
+                                            <strong>Full Stack Development</strong>
+                                            <p>End-to-end application development</p>
+                                        </div>
+                                        <div className="competency-item">
+                                            <span className="competency-icon">☁️</span>
+                                            <strong>Cloud Architecture</strong>
+                                            <p>Azure & AWS Solutions</p>
+                                        </div>
+                                        <div className="competency-item">
+                                            <span className="competency-icon">📱</span>
+                                            <strong>Mobile Development</strong>
+                                            <p>Cross-Platform Applications</p>
+                                        </div>
+                                        <div className="competency-item">
+                                            <span className="competency-icon">🔄</span>
+                                            <strong>DevOps & CI/CD</strong>
+                                            <p>Automated Deployment Pipelines</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
