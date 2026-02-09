@@ -1,6 +1,6 @@
 import './DeveloperPage.css';
 import HariImage from '../assets/Hari.jpg';
-import SurajImage from '../assets/Suraj.JPG';
+import SurajImage from '../assets/Suraj.jpg';
 
 const DeveloperPage = () => {
     return (
