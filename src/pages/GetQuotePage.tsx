@@ -14,9 +14,51 @@ const GetQuotePage = () => {
     });
     const [submitting, setSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const validateForm = () => {
+        const newErrors: { [key: string]: string } = {};
+
+        // Validate name
+        if (!formData.name.trim() || formData.name.trim().length < 2) {
+            newErrors.name = 'Name must be at least 2 characters';
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+
+        // Validate phone - international format or local format
+        const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+        if (!phoneRegex.test(formData.phone)) {
+            newErrors.phone = 'Please enter a valid phone number (digits, spaces, +, -, (, ) only)';
+        }
+
+        // Validate product category
+        if (!formData.product) {
+            newErrors.product = 'Please select a product category';
+        }
+
+        // Validate quantity - must be numeric
+        const quantityNum = parseInt(formData.quantity);
+        if (!formData.quantity || isNaN(quantityNum) || quantityNum <= 0) {
+            newErrors.quantity = 'Please enter a valid quantity (numbers only, greater than 0)';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrors({});
+
+        if (!validateForm()) {
+            return;
+        }
+
         setSubmitting(true);
         setSubmitSuccess(false);
 
@@ -53,10 +95,18 @@ const GetQuotePage = () => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
+        // Clear error for this field when user starts typing
+        if (errors[name]) {
+            setErrors({
+                ...errors,
+                [name]: ''
+            });
+        }
     };
 
     return (
@@ -135,9 +185,11 @@ const GetQuotePage = () => {
                                                 name="name"
                                                 value={formData.name}
                                                 onChange={handleChange}
-                                                className="form-input"
+                                                className={`form-input ${errors.name ? 'error' : ''}`}
                                                 required
+                                                minLength={2}
                                             />
+                                            {errors.name && <span className="error-message">{errors.name}</span>}
                                         </div>
 
                                         <div className="form-group">
@@ -148,9 +200,10 @@ const GetQuotePage = () => {
                                                 name="email"
                                                 value={formData.email}
                                                 onChange={handleChange}
-                                                className="form-input"
+                                                className={`form-input ${errors.email ? 'error' : ''}`}
                                                 required
                                             />
+                                            {errors.email && <span className="error-message">{errors.email}</span>}
                                         </div>
                                     </div>
 
@@ -163,9 +216,11 @@ const GetQuotePage = () => {
                                                 name="phone"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                className="form-input"
+                                                className={`form-input ${errors.phone ? 'error' : ''}`}
+                                                placeholder="+1-234-567-8900"
                                                 required
                                             />
+                                            {errors.phone && <span className="error-message">{errors.phone}</span>}
                                         </div>
 
                                         <div className="form-group">
@@ -188,9 +243,10 @@ const GetQuotePage = () => {
                                             name="product"
                                             value={formData.product}
                                             onChange={handleChange}
-                                            className="form-input"
+                                            className={`form-input ${errors.product ? 'error' : ''}`}
                                             required
                                         >
+                                            {errors.product && <span className="error-message">{errors.product}</span>}
                                             <option value="">Select a category</option>
                                             <option value="scissors-forceps">Surgical Scissors & Forceps</option>
                                             <option value="scalpels">Scalpels & Blades</option>
@@ -212,10 +268,11 @@ const GetQuotePage = () => {
                                             name="quantity"
                                             value={formData.quantity}
                                             onChange={handleChange}
-                                            className="form-input"
-                                            placeholder="e.g., 100 units"
+                                            className={`form-input ${errors.quantity ? 'error' : ''}`}
+                                            placeholder="e.g., 100"
                                             required
                                         />
+                                        {errors.quantity && <span className="error-message">{errors.quantity}</span>}
                                     </div>
 
                                     <div className="form-group">

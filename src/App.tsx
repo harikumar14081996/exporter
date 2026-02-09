@@ -18,6 +18,7 @@ import CMSPage from './pages/admin/CMSPage';
 import QuoteRequestsPage from './pages/admin/QuoteRequestsPage';
 import SettingsPage from './pages/admin/SettingsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import DeveloperPage from './pages/DeveloperPage';
 import './App.css';
 
 // Helper to darken color for gradients
@@ -92,6 +93,7 @@ function App() {
         <Route path="/get-quote" element={<PublicLayout><GetQuotePage /></PublicLayout>} />
         <Route path="/category/:categoryId" element={<PublicLayout><CategoryProductsPage /></PublicLayout>} />
         <Route path="/product/:slug" element={<PublicLayout><ProductDetailsPage /></PublicLayout>} />
+        <Route path="/developer" element={<PublicLayout><DeveloperPage /></PublicLayout>} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLoginPage />} />

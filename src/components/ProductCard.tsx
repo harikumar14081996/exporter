@@ -6,6 +6,7 @@ interface Product {
     title: string;
     description: string;
     icon: string;
+    image_url?: string;
     category: string;
 }
 
@@ -27,9 +28,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
     return (
         <div className="product-card">
             <div className="product-card-icon">
-                <div className="icon-wrapper">
-                    {product.icon}
-                </div>
+                {product.image_url ? (
+                    <img
+                        src={product.image_url}
+                        alt={product.title}
+                        className="product-image"
+                    />
+                ) : (
+                    <div className="icon-wrapper">
+                        {product.icon}
+                    </div>
+                )}
             </div>
             <div className="product-card-content">
                 <h3 className="product-card-title">{product.title}</h3>

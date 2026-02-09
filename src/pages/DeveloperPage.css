@@ -1,0 +1,235 @@
+.developer-page {
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.developer-content-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.developer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.developer-info h2,
+.developer-features h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.developer-intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gray-700);
+    margin-bottom: 2rem;
+}
+
+.tech-stack {
+    margin-top: 2rem;
+}
+
+.tech-stack h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--gray-900);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.tech-item {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    transition: all var(--transition-base);
+    border: 2px solid transparent;
+}
+
+.tech-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+}
+
+.tech-icon {
+    font-size: 3rem;
+    margin-bottom: 0.75rem;
+}
+
+.tech-item h4 {
+    font-size: 1.25rem;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.tech-item p {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+}
+
+.features-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+.feature-card {
+    background: var(--gray-50);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: all var(--transition-base);
+}
+
+.feature-card:hover {
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateX(8px);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.feature-card h4 {
+    font-size: 1.1rem;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.architecture-section {
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-2xl);
+    background: var(--gray-50);
+    border-radius: var(--radius-xl);
+}
+
+.architecture-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    text-align: center;
+}
+
+.architecture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.arch-layer {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.arch-layer h4 {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary);
+}
+
+.arch-layer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.arch-layer li {
+    padding: 0.5rem 0;
+    color: var(--gray-700);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.arch-layer li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .developer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .architecture-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .developer-page {
+        padding-top: 70px;
+    }
+
+    .developer-content-section {
+        padding: var(--spacing-xl) 0;
+    }
+
+    .developer-info h2,
+    .developer-features h2,
+    .architecture-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .architecture-section {
+        padding: var(--spacing-lg);
+    }
+
+    .arch-layer {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .developer-page {
+        padding-top: 56px;
+    }
+
+    .tech-item,
+    .feature-card,
+    .arch-layer {
+        padding: 1rem;
+    }
+
+    .developer-intro {
+        font-size: 1rem;
+    }
+
+    .tech-icon {
+        font-size: 2.5rem;
+    }
+
+    .feature-card:hover {
+        transform: none;
+    }
+}

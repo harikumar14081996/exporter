@@ -52,6 +52,7 @@ const Footer = () => {
                                 <li><Link to="/about">About Us</Link></li>
                                 <li><Link to="/contact">Contact Us</Link></li>
                                 <li><Link to="/get-quote">Get Quote</Link></li>
+                                <li><Link to="/developer">Developer</Link></li>
                             </ul>
                         </div>
 
@@ -104,9 +105,9 @@ const Footer = () => {
                             © {currentYear} {settings?.copyright_text || 'SR Pharmagical Exporter. All Rights Reserved.'}
                         </p>
                         <div className="footer-links-inline">
-                            <a href="#privacy">Privacy Policy</a>
-                            <a href="#terms">Terms of Service</a>
-                            <a href="#disclaimer">Disclaimer</a>
+                            <Link to="/about">About</Link>
+                            <Link to="/contact">Contact</Link>
+                            <Link to="/developer">Developer</Link>
                         </div>
                     </div>
                 </div>

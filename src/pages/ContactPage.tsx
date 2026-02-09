@@ -12,9 +12,47 @@ const ContactPage = () => {
     });
     const [submitting, setSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+    const validateForm = () => {
+        const newErrors: { [key: string]: string } = {};
+
+        if (!formData.name.trim() || formData.name.trim().length < 2) {
+            newErrors.name = 'Name must be at least 2 characters';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
+        }
+
+        if (formData.phone) {
+            const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+            if (!phoneRegex.test(formData.phone)) {
+                newErrors.phone = 'Please enter a valid phone number';
+            }
+        }
+
+        if (!formData.subject.trim()) {
+            newErrors.subject = 'Subject is required';
+        }
+
+        if (!formData.message.trim() || formData.message.trim().length < 10) {
+            newErrors.message = 'Message must be at least 10 characters';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrors({});
+
+        if (!validateForm()) {
+            return;
+        }
+
         setSubmitting(true);
         setSubmitSuccess(false);
 
@@ -41,10 +79,17 @@ const ContactPage = () => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
+        if (errors[name]) {
+            setErrors({
+                ...errors,
+                [name]: ''
+            });
+        }
     };
 
     return (

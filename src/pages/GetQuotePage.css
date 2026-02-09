@@ -209,3 +209,18 @@
         font-size: 2.5rem;
     }
 }
+
+/* Error styling for validation */
+.form-input.error,
+.form-textarea.error {
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+.error-message {
+    display: block;
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}

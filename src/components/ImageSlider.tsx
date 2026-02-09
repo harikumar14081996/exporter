@@ -101,7 +101,7 @@ const ImageSlider = () => {
                         key={slide.id}
                         className={`slide ${index === currentSlide ? 'active' : ''}`}
                         style={{
-                            background: `linear-gradient(135deg, rgba(0, 102, 204, 0.92) 0%, rgba(0, 73, 153, 0.92) 100%), url(${slide.image_url})`,
+                            background: `linear-gradient(135deg, rgba(0, 102, 204, 0.4) 0%, rgba(0, 73, 153, 0.5) 100%), url(${slide.image_url})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}

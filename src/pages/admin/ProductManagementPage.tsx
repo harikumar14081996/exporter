@@ -152,7 +152,16 @@ const ProductManagementPage = () => {
     return (
         <div className="admin-page">
             <div className="page-header">
-                <h1>Product Management</h1>
+                <div>
+                    <h1>Product Management</h1>
+                    <div style={{ fontSize: '0.9rem', color: '#6b7280', marginTop: '0.5rem' }}>
+                        {filteredProducts.length === products.length ? (
+                            <span>Total Products: <strong>{products.length}</strong></span>
+                        ) : (
+                            <span>Showing: <strong>{filteredProducts.length}</strong> of <strong>{products.length}</strong> products</span>
+                        )}
+                    </div>
+                </div>
                 <button className="btn btn-primary" onClick={() => handleOpenModal()}>
                     + Add Product
                 </button>
