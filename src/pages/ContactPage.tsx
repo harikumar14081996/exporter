@@ -80,10 +80,30 @@ const ContactPage = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
+
+        // Apply input restrictions
+        let sanitizedValue = value;
+
+        // Phone number: only allow digits, limit to 10
+        if (name === 'phone') {
+            sanitizedValue = value.replace(/\D/g, '').slice(0, 10);
+        }
+
+        // Name: only allow letters and spaces
+        if (name === 'name') {
+            sanitizedValue = value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+        }
+
+        // Message: limit to 1000 characters
+        if (name === 'message') {
+            sanitizedValue = value.slice(0, 1000);
+        }
+
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: sanitizedValue,
         });
+
         if (errors[name]) {
             setErrors({
                 ...errors,

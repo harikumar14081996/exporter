@@ -96,10 +96,30 @@ const GetQuotePage = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        // Apply input restrictions
+        let sanitizedValue = value;
+
+        // Phone number: only allow digits, limit to 10
+        if (name === 'phone') {
+            sanitizedValue = value.replace(/\D/g, '').slice(0, 10);
+        }
+
+        // Name: only allow letters and spaces
+        if (name === 'name') {
+            sanitizedValue = value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+        }
+
+        // Quantity: only allow digits
+        if (name === 'quantity') {
+            sanitizedValue = value.replace(/\D/g, '');
+        }
+
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: sanitizedValue,
         });
+
         // Clear error for this field when user starts typing
         if (errors[name]) {
             setErrors({
