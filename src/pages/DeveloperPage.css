@@ -330,11 +330,11 @@
 
 @media (max-width: 768px) {
     .developer-page {
-        padding-top: 70px;
+        padding-top: 80px;
     }
 
     .page-hero {
-        padding: var(--spacing-xl) 0;
+        padding: calc(var(--spacing-xl) + 1rem) var(--spacing-md);
     }
 
     .page-title {
@@ -376,7 +376,11 @@
 
 @media (max-width: 480px) {
     .developer-page {
-        padding-top: 56px;
+        padding-top: 70px;
+    }
+
+    .page-hero {
+        padding: calc(var(--spacing-lg) + 1.5rem) var(--spacing-sm);
     }
 
     .page-title {
