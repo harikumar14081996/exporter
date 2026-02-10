@@ -117,11 +117,8 @@ router.put('/settings', verifySuperAdminToken, async (req, res) => {
 // LEGACY ENDPOINTS (password-based, can be deprecated)
 // ============================================================================
 
-// All routes below require super admin PASSWORD verification
-router.use(verifySuperAdmin);
-
 // PUT /api/super-admin/password - Update super admin password (legacy)
-router.put('/password', async (req, res) => {
+router.put('/password', verifySuperAdmin, async (req, res) => {
     try {
         const { newPassword } = req.body;
 
@@ -144,7 +141,7 @@ router.put('/password', async (req, res) => {
 });
 
 // POST /api/super-admin/products - Create product (bypasses 5-product limit)
-router.post('/products', async (req, res) => {
+router.post('/products', verifySuperAdmin, async (req, res) => {
     try {
         const { category_id, name, description, image_url, icon, is_active } = req.body;
 
