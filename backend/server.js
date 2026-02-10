@@ -46,6 +46,7 @@ const superAdminRoutes = require('./routes/superAdmin');
 app.use('/api', publicRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/super-admin', superAdminRoutes);
+app.use('/api/superadmin', superAdminRoutes); // Alternative route without hyphen
 
 // Health check endpoint
 app.get('/health', (req, res) => {
