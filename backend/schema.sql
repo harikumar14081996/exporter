@@ -171,7 +171,7 @@ VALUES ('$2b$10$placeholder_hash_will_be_generated', 'SR Pharmagical Exporter', 
 
 -- Default admin (username: admin, password: admin123)
 INSERT INTO admins (username, password_hash)
-VALUES ('admin', '$2b$10$vI8aWBnW3fID.ZQ4/zo1G.q1lRps.9cGLcZEiGDMVr5yUP1KUOYTa');
+VALUES ('admin', '$2b$10$cVIGESlvPZc0HQiH9bsbBeATaJYxYD.jOB9uYP49PV0Dg.k64aicW');
 
 -- Default super admin (username: superadmin, password: SuperAdmin@123)
 INSERT INTO super_admins (username, password_hash, email)
