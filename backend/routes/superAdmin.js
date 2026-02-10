@@ -88,11 +88,8 @@ router.get('/settings', verifyAdmin, async (req, res) => {
     }
 });
 
-// All routes below require super admin PASSWORD verification
-router.use(verifySuperAdmin);
-
-// PUT /api/super-admin/settings - Update website settings
-router.put('/settings', async (req, res) => {
+// PUT /api/super-admin/settings - Update website settings (JWT-based)
+router.put('/settings', verifySuperAdminToken, async (req, res) => {
     try {
         const { website_name, theme_color, copyright_text } = req.body;
 
@@ -116,7 +113,14 @@ router.put('/settings', async (req, res) => {
     }
 });
 
-// PUT /api/super-admin/password - Update super admin password
+// ============================================================================
+// LEGACY ENDPOINTS (password-based, can be deprecated)
+// ============================================================================
+
+// All routes below require super admin PASSWORD verification
+router.use(verifySuperAdmin);
+
+// PUT /api/super-admin/password - Update super admin password (legacy)
 router.put('/password', async (req, res) => {
     try {
         const { newPassword } = req.body;
