@@ -104,6 +104,19 @@ const AdminLayout = () => {
                     ))}
                 </nav>
 
+                <div className="sidebar-divider"></div>
+
+                <nav className="sidebar-nav">
+                    <Link
+                        to="/admin/change-password"
+                        className={`sidebar-link ${location.pathname === '/admin/change-password' ? 'active' : ''}`}
+                        onClick={handleNavClick}
+                    >
+                        <span className="link-icon">🔒</span>
+                        <span className="link-text">Change Password</span>
+                    </Link>
+                </nav>
+
                 <div className="sidebar-footer">
                     <div className="admin-user-info">
                         <div className="user-avatar">{adminUser.username.charAt(0).toUpperCase()}</div>

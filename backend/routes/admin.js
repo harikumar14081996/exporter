@@ -51,6 +51,52 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// POST /api/admin/change-password - Change admin password
+router.post('/change-password', verifyAdmin, async (req, res) => {
+    try {
+        const { oldPassword, newPassword } = req.body;
+
+        if (!oldPassword || !newPassword) {
+            return res.status(400).json({ error: 'Old password and new password are required' });
+        }
+
+        // Validate new password strength
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: 'New password must be at least 6 characters long' });
+        }
+
+        // Get current admin from database
+        const result = await db.query('SELECT * FROM admins WHERE id = $1', [req.adminId]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Admin not found' });
+        }
+
+        const admin = result.rows[0];
+
+        // Verify old password
+        const isValid = await bcrypt.compare(oldPassword, admin.password_hash);
+
+        if (!isValid) {
+            return res.status(401).json({ error: 'Current password is incorrect' });
+        }
+
+        // Hash new password
+        const newPasswordHash = await bcrypt.hash(newPassword, 10);
+
+        // Update password in database
+        await db.query(
+            'UPDATE admins SET password_hash = $1 WHERE id = $2',
+            [newPasswordHash, req.adminId]
+        );
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Change password error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // All routes below require admin authentication
 router.use(verifyAdmin);
 

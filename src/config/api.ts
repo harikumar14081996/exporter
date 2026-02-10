@@ -23,6 +23,7 @@ export const config = {
 
         // Admin endpoints
         adminLogin: `${API_BASE_URL}/api/admin/login`,
+        adminChangePassword: `${API_BASE_URL}/api/admin/change-password`,
         adminProducts: `${API_BASE_URL}/api/admin/products`,
         adminCategories: `${API_BASE_URL}/api/admin/categories`,
         adminSliders: `${API_BASE_URL}/api/admin/sliders`,

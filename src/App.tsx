@@ -17,6 +17,7 @@ import SliderManagementPage from './pages/admin/SliderManagementPage';
 import CMSPage from './pages/admin/CMSPage';
 import QuoteRequestsPage from './pages/admin/QuoteRequestsPage';
 import SettingsPage from './pages/admin/SettingsPage';
+import ChangePasswordPage from './pages/admin/ChangePasswordPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import DeveloperPage from './pages/DeveloperPage';
 import './App.css';
@@ -98,6 +99,7 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLoginPage />} />
         <Route path="/admin" element={<AdminLayout />}>
+          <Route path="change-password" element={<ChangePasswordPage />} />
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboardPage />} />
           <Route path="categories" element={<CategoryManagementPage />} />
