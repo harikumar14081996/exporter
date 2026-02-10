@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
-import './AdminLayout.css';
+import './SuperAdminLayout.css';
 
-const AdminLayout = () => {
+const SuperAdminLayout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [adminUser, setAdminUser] = useState<any>(null);
+    const [superAdminUser, setSuperAdminUser] = useState<any>(null);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
         // Check authentication
-        const token = localStorage.getItem('adminToken');
-        const user = localStorage.getItem('adminUser');
+        const token = localStorage.getItem('superAdminToken');
+        const user = localStorage.getItem('superAdminUser');
 
         if (!token || !user) {
-            navigate('/admin/login');
+            navigate('/superadmin/login');
             return;
         }
 
         try {
-            setAdminUser(JSON.parse(user));
+            setSuperAdminUser(JSON.parse(user));
         } catch (e) {
-            localStorage.removeItem('adminUser');
-            navigate('/admin/login');
+            localStorage.removeItem('superAdminUser');
+            navigate('/superadmin/login');
         }
     }, [navigate]);
 
@@ -33,26 +33,25 @@ const AdminLayout = () => {
             const mobile = window.innerWidth <= 768;
             setIsMobile(mobile);
             if (!mobile) {
-                setSidebarOpen(true); // Open sidebar on desktop
+                setSidebarOpen(true);
             } else {
-                setSidebarOpen(false); // Close sidebar on mobile by default
+                setSidebarOpen(false);
             }
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); // Set initial state
+        handleResize();
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminUser');
-        navigate('/admin/login');
+        localStorage.removeItem('superAdminToken');
+        localStorage.removeItem('superAdminUser');
+        navigate('/superadmin/login');
     };
 
     const handleNavClick = () => {
-        // Close sidebar on mobile when clicking a nav item
         if (isMobile) {
             setSidebarOpen(false);
         }
@@ -63,19 +62,15 @@ const AdminLayout = () => {
     };
 
     const navItems = [
-        { name: 'Dashboard', path: '/admin/dashboard', icon: '📊' },
-        { name: 'Categories', path: '/admin/categories', icon: '📁' },
-        { name: 'Products', path: '/admin/products', icon: '📦' },
-        { name: 'Sliders', path: '/admin/sliders', icon: '🖼️' },
-        { name: 'CMS Content', path: '/admin/cms', icon: '📝' },
-        { name: 'Quotes', path: '/admin/quotes', icon: '💬' },
+        { name: 'Dashboard', path: '/superadmin/dashboard', icon: '📊' },
+        { name: 'Manage Admins', path: '/superadmin/admins', icon: '👥' },
+        { name: 'Settings', path: '/superadmin/settings', icon: '⚙️' },
     ];
 
-    if (!adminUser) return null;
+    if (!superAdminUser) return null;
 
     return (
-        <div className="admin-layout">
-            {/* Mobile Overlay */}
+        <div className="superadmin-layout">
             {isMobile && (
                 <div
                     className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`}
@@ -84,9 +79,9 @@ const AdminLayout = () => {
             )}
 
             {/* Sidebar */}
-            <aside className={`admin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
+            <aside className={`superadmin-sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
                 <div className="sidebar-header">
-                    <span className="sidebar-logo">Admin Panel</span>
+                    <span className="sidebar-logo">⚡ Super Admin</span>
                 </div>
 
                 <nav className="sidebar-nav">
@@ -103,33 +98,20 @@ const AdminLayout = () => {
                     ))}
                 </nav>
 
-                <div className="sidebar-divider"></div>
-
-                <nav className="sidebar-nav">
-                    <Link
-                        to="/admin/change-password"
-                        className={`sidebar-link ${location.pathname === '/admin/change-password' ? 'active' : ''}`}
-                        onClick={handleNavClick}
-                    >
-                        <span className="link-icon">🔒</span>
-                        <span className="link-text">Change Password</span>
-                    </Link>
-                </nav>
-
                 <div className="sidebar-footer">
                     <div className="admin-user-info">
-                        <div className="user-avatar">{adminUser.username.charAt(0).toUpperCase()}</div>
+                        <div className="user-avatar">{superAdminUser.username.charAt(0).toUpperCase()}</div>
                         <div className="user-details">
-                            <span className="username">{adminUser.username}</span>
-                            <span className="role">Administrator</span>
+                            <span className="username">{superAdminUser.username}</span>
+                            <span className="role">Super Administrator</span>
                         </div>
                     </div>
                 </div>
             </aside>
 
             {/* Main Content */}
-            <div className="admin-main">
-                <header className="admin-header">
+            <div className="superadmin-main">
+                <header className="superadmin-header">
                     <button
                         className="sidebar-toggle"
                         onClick={toggleSidebar}
@@ -145,7 +127,7 @@ const AdminLayout = () => {
                     </div>
                 </header>
 
-                <main className="admin-content">
+                <main className="superadmin-content">
                     <Outlet />
                 </main>
             </div>
@@ -153,4 +135,4 @@ const AdminLayout = () => {
     );
 };
 
-export default AdminLayout;
+export default SuperAdminLayout;

@@ -49,7 +49,32 @@ const verifySuperAdmin = async (req, res, next) => {
     }
 };
 
+// Middleware to verify super admin JWT token
+const verifySuperAdminToken = async (req, res, next) => {
+    try {
+        const token = req.headers.authorization?.split(' ')[1]; // Bearer TOKEN
+
+        if (!token) {
+            return res.status(401).json({ error: 'No token provided' });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+        // Check if token is for super admin
+        if (decoded.role !== 'superadmin') {
+            return res.status(403).json({ error: 'Super admin access required' });
+        }
+
+        req.superAdminId = decoded.id;
+        req.superAdminUsername = decoded.username;
+        next();
+    } catch (error) {
+        return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+};
+
 module.exports = {
     verifyAdmin,
     verifySuperAdmin,
+    verifySuperAdminToken,
 };

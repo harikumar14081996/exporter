@@ -35,5 +35,10 @@ export const config = {
         adminQuotes: `${API_BASE_URL}/api/admin/quotes`,
         adminSettings: `${API_BASE_URL}/api/super-admin/settings`, // Super admin only
         adminVerify: `${API_BASE_URL}/api/super-admin/verify`, // Super admin verify
+
+        // Super Admin endpoints
+        superAdminLogin: `${API_BASE_URL}/api/superadmin/login`,
+        superAdminAdmins: `${API_BASE_URL}/api/superadmin/admins`,
+        superAdminSettings: `${API_BASE_URL}/api/super-admin/settings`,
     }
 };

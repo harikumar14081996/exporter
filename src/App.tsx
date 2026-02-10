@@ -18,6 +18,10 @@ import CMSPage from './pages/admin/CMSPage';
 import QuoteRequestsPage from './pages/admin/QuoteRequestsPage';
 import SettingsPage from './pages/admin/SettingsPage';
 import ChangePasswordPage from './pages/admin/ChangePasswordPage';
+import SuperAdminLoginPage from './pages/superadmin/SuperAdminLoginPage';
+import SuperAdminLayout from './components/superadmin/SuperAdminLayout';
+import SuperAdminDashboardPage from './pages/superadmin/SuperAdminDashboardPage';
+import AdminManagementPage from './pages/superadmin/AdminManagementPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import DeveloperPage from './pages/DeveloperPage';
 import './App.css';
@@ -109,6 +113,15 @@ function App() {
           <Route path="quotes" element={<QuoteRequestsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           {/* More admin routes will be added here */}
+        </Route>
+
+        {/* Super Admin Routes */}
+        <Route path="/superadmin/login" element={<SuperAdminLoginPage />} />
+        <Route path="/superadmin" element={<SuperAdminLayout />}>
+          <Route index element={<Navigate to="/superadmin/dashboard" replace />} />
+          <Route path="dashboard" element={<SuperAdminDashboardPage />} />
+          <Route path="admins" element={<AdminManagementPage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
     </Router>
