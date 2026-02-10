@@ -17,11 +17,22 @@ const CategoryManagementPage = () => {
 
     const fetchCategories = async () => {
         try {
-            const data = await apiService.getCategories();
-            // Get product count for each category via admin endpoint if available, 
-            // but for now we just get the public categories list which is fine.
-            // If we needed extra admin data, we'd use a specific admin endpoint.
-            setCategories(data);
+            const token = localStorage.getItem('adminToken');
+            // Use admin endpoint to get product counts
+            const response = await fetch(config.endpoints.adminCategories, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setCategories(data);
+            } else {
+                // Fallback to public if admin fetch fails (though it shouldn't for admin)
+                const data = await apiService.getCategories();
+                setCategories(data);
+            }
         } catch (error) {
             console.error('Error fetching categories:', error);
             setError('Failed to load categories');
