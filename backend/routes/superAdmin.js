@@ -113,6 +113,45 @@ router.put('/settings', verifySuperAdminToken, async (req, res) => {
     }
 });
 
+// POST /api/superadmin/change-password - Change super admin password (JWT-based)
+router.post('/change-password', verifySuperAdminToken, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ error: 'Current and new password are required' });
+        }
+
+        if (newPassword.length < 6) {
+            return res.status(400).json({ error: 'New password must be at least 6 characters' });
+        }
+
+        // Get current super admin
+        const result = await db.query('SELECT * FROM super_admins WHERE id = $1', [req.superAdminId]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Super admin not found' });
+        }
+
+        // Verify current password
+        const isValid = await bcrypt.compare(currentPassword, result.rows[0].password_hash);
+        if (!isValid) {
+            return res.status(401).json({ error: 'Current password is incorrect' });
+        }
+
+        // Update password
+        const newHash = await bcrypt.hash(newPassword, 10);
+        await db.query(
+            'UPDATE super_admins SET password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2',
+            [newHash, req.superAdminId]
+        );
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        console.error('Error changing super admin password:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // ============================================================================
 // LEGACY ENDPOINTS (password-based, can be deprecated)
 // ============================================================================

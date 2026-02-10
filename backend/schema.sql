@@ -167,7 +167,7 @@ CREATE INDEX idx_quotes_created ON quotes(created_at);
 -- Insert Default Super Admin Settings
 -- Password: SuperAdmin@123 (hashed with bcrypt)
 INSERT INTO super_admin_settings (super_password_hash, website_name, theme_color, copyright_text)
-VALUES ('$2b$10$placeholder_hash_will_be_generated', 'SR Pharmagical Exporter', '#0066cc', 'SR Pharmagical Exporter. All Rights Reserved.');
+VALUES ('$2b$10$iz3EzbHcUs9u0PQmUVe5vekb7wo5.GKqcRT2AGpEHrqSe2VmxrQrS', 'SR Pharmagical Exporter', '#0066cc', 'SR Pharmagical Exporter. All Rights Reserved.');
 
 -- Default admin (username: admin, password: admin123)
 INSERT INTO admins (username, password_hash)

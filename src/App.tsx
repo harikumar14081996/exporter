@@ -22,6 +22,7 @@ import SuperAdminLoginPage from './pages/superadmin/SuperAdminLoginPage';
 import SuperAdminLayout from './components/superadmin/SuperAdminLayout';
 import SuperAdminDashboardPage from './pages/superadmin/SuperAdminDashboardPage';
 import AdminManagementPage from './pages/superadmin/AdminManagementPage';
+import SuperAdminChangePasswordPage from './pages/superadmin/ChangePasswordPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import DeveloperPage from './pages/DeveloperPage';
 import './App.css';
@@ -122,6 +123,7 @@ function App() {
           <Route path="dashboard" element={<SuperAdminDashboardPage />} />
           <Route path="admins" element={<AdminManagementPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="change-password" element={<SuperAdminChangePasswordPage />} />
         </Route>
       </Routes>
     </Router>

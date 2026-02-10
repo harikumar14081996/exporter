@@ -65,6 +65,7 @@ const SuperAdminLayout = () => {
         { name: 'Dashboard', path: '/superadmin/dashboard', icon: '📊' },
         { name: 'Manage Admins', path: '/superadmin/admins', icon: '👥' },
         { name: 'Settings', path: '/superadmin/settings', icon: '⚙️' },
+        { name: 'Change Password', path: '/superadmin/change-password', icon: '🔑' },
     ];
 
     if (!superAdminUser) return null;
