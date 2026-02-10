@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS sliders CASCADE;
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS super_admin_settings CASCADE;
+DROP TABLE IF EXISTS super_admins CASCADE;
 DROP TABLE IF EXISTS admins CASCADE;
 
 -- ============================================================================
@@ -24,6 +25,16 @@ CREATE TABLE admins (
     username VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Super Admins Table  
+CREATE TABLE super_admins (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Super Admin Settings Table
@@ -158,10 +169,13 @@ CREATE INDEX idx_quotes_created ON quotes(created_at);
 INSERT INTO super_admin_settings (super_password_hash, website_name, theme_color, copyright_text)
 VALUES ('$2b$10$placeholder_hash_will_be_generated', 'SR Pharmagical Exporter', '#0066cc', 'SR Pharmagical Exporter. All Rights Reserved.');
 
--- Insert Default Admin User
--- Username: admin, Password: admin123 (hashed with bcrypt)
+-- Default admin (username: admin, password: admin123)
 INSERT INTO admins (username, password_hash)
-VALUES ('admin', '$2b$10$placeholder_hash_will_be_generated');
+VALUES ('admin', '$2b$10$vI8aWBnW3fID.ZQ4/zo1G.q1lRps.9cGLcZEiGDMVr5yUP1KUOYTa');
+
+-- Default super admin (username: superadmin, password: SuperAdmin@123)
+INSERT INTO super_admins (username, password_hash, email)
+VALUES ('superadmin', '$2b$10$xEFZU5dbkXZTJXDjtOuLEOOLzCE67OsoCw7p8NjILoejVyBh73oQe', 'superadmin@srpharmagical.com');
 
 -- Insert Categories (from HomePage.tsx products array)
 INSERT INTO categories (name) VALUES
