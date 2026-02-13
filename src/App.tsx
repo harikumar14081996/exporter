@@ -55,9 +55,12 @@ function App() {
       try {
         const settings = await apiService.getSettings();
         if (settings) {
-          // Set Website Name
+          // Set Website Name (replace legacy branding if DB not updated)
           if (settings.website_name) {
-            document.title = settings.website_name;
+            const name = settings.website_name.replace(/SR Pharmagical Exporter/gi, 'Shahraj Exporter');
+            document.title = name;
+          } else {
+            document.title = 'Shahraj Exporter';
           }
 
           // Set Theme Color

@@ -18,28 +18,28 @@
 
 .breadcrumbs {
     margin-bottom: 2rem;
-    color: #6b7280;
+    color: #374151;
     font-size: 0.9rem;
 }
 
 .breadcrumbs a {
-    color: #6b7280;
+    color: var(--primary);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 .breadcrumbs a:hover {
-    color: var(--primary);
+    color: var(--primary-dark);
 }
 
 .breadcrumbs .separator {
     margin: 0 0.5rem;
-    color: #d1d5db;
+    color: #9ca3af;
 }
 
 .breadcrumbs .current {
     color: #111827;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .product-details-grid {
