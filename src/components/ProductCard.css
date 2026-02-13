@@ -57,10 +57,6 @@
 
 .product-card-icon {
     margin-bottom: 1.5rem;
-    overflow: hidden;
-    border-radius: var(--radius-lg);
-    height: 220px;
-    width: 100%;
 }
 
 .product-image {
