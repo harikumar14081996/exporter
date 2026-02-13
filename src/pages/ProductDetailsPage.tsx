@@ -105,9 +105,6 @@ const ProductDetailsPage = () => {
                             >
                                 Request Quote
                             </Link>
-                            <a href="tel:+919876543210" className="btn btn-secondary btn-large">
-                                Call Now
-                            </a>
                         </div>
 
                         <div className="product-features">
