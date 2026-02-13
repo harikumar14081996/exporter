@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { apiService } from '../services/api';
 import './Footer.css';
 
+// Helper to replace legacy branding from DB
+const fixBranding = (text: string) =>
+    text ? text.replace(/SR Pharmagical Exporter/gi, 'Shahraj Exporter')
+        .replace(/srpharmagicalexporter/gi, 'shahrajexporter')
+        : text;
+
 const Footer = () => {
     const [contact, setContact] = useState<any>(null);
     const [settings, setSettings] = useState<any>(null);
@@ -24,6 +30,10 @@ const Footer = () => {
         fetchData();
     }, []);
 
+    const websiteName = fixBranding(settings?.website_name) || 'Shahraj Exporter';
+    const copyrightText = fixBranding(settings?.copyright_text) || 'Shahraj Exporter. All Rights Reserved.';
+    const contactEmail = fixBranding(contact?.email) || 'info@shahrajexporter.com';
+
     return (
         <footer className="footer">
             <div className="footer-main">
@@ -31,7 +41,7 @@ const Footer = () => {
                     <div className="footer-grid">
                         {/* Company Info */}
                         <div className="footer-column">
-                            <h3 className="footer-title">{settings?.website_name || 'Shahraj Exporter'}</h3>
+                            <h3 className="footer-title">{websiteName}</h3>
                             <p className="footer-text">
                                 Your trusted partner for premium quality surgical instruments worldwide.
                                 We specialize in manufacturing and exporting medical-grade surgical tools
@@ -52,7 +62,8 @@ const Footer = () => {
                                 <li><Link to="/about">About Us</Link></li>
                                 <li><Link to="/contact">Contact Us</Link></li>
                                 <li><Link to="/get-quote">Get Quote</Link></li>
-                                <li><Link to="/developer">Developer</Link></li>
+                                <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+                                <li><Link to="/terms">Terms & Conditions</Link></li>
                             </ul>
                         </div>
 
@@ -89,7 +100,7 @@ const Footer = () => {
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
-                                    <span>{contact?.email || 'info@shahrajexporter.com'}</span>
+                                    <span>{contactEmail}</span>
                                 </li>
                             </ul>
                         </div>
@@ -102,7 +113,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="footer-bottom-content">
                         <p className="footer-copyright">
-                            © {currentYear} {settings?.copyright_text || 'Shahraj Exporter. All Rights Reserved.'}
+                            © {currentYear} {copyrightText}
                         </p>
                         <div className="footer-links-inline">
                             <Link to="/about">About</Link>

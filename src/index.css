@@ -277,8 +277,11 @@ section {
 .category-hero h1,
 .category-hero h2,
 .category-hero .category-title,
-.category-hero .breadcrumbs {
-  color: var(--white);
+.category-hero .breadcrumbs,
+.category-hero .breadcrumbs a,
+.category-hero .breadcrumbs .separator,
+.category-hero .breadcrumbs .current {
+  color: var(--white) !important;
 }
 
 /* Grid Layouts */
