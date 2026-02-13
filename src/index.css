@@ -262,6 +262,25 @@ section {
   border-radius: var(--radius-sm);
 }
 
+/* Global Page Hero - White text for all hero sections */
+.page-hero,
+.category-hero {
+  color: var(--white);
+}
+
+.page-hero h1,
+.page-hero h2,
+.page-hero h3,
+.page-hero p,
+.page-hero .page-title,
+.page-hero .page-subtitle,
+.category-hero h1,
+.category-hero h2,
+.category-hero .category-title,
+.category-hero .breadcrumbs {
+  color: var(--white);
+}
+
 /* Grid Layouts */
 .grid {
   display: grid;

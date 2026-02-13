@@ -98,21 +98,7 @@ const AboutPage = () => {
                                 <p key={index}>{paragraph}</p>
                             ))}
                         </div>
-                        <div className="about-image-content">
-                            <div className="image-placeholder-about">
-                                <svg viewBox="0 0 400 500" fill="none">
-                                    <rect width="400" height="500" fill="url(#about-gradient-2)" rx="20" />
-                                    <circle cx="200" cy="200" r="80" fill="rgba(255,255,255,0.2)" />
-                                    <path d="M200 150 L200 250 M150 200 L250 200" stroke="white" strokeWidth="10" strokeLinecap="round" />
-                                    <defs>
-                                        <linearGradient id="about-gradient-2" x1="0" y1="0" x2="400" y2="500">
-                                            <stop offset="0%" stopColor="#0066cc" />
-                                            <stop offset="100%" stopColor="#00a86b" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </section>

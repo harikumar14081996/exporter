@@ -4,6 +4,31 @@ const API_BASE_URL = (envApiUrl && envApiUrl.trim().startsWith('http'))
     ? envApiUrl
     : (import.meta.env.PROD ? '' : 'http://localhost:3001');
 
+// Auto-logout helper: clears tokens and redirects on 401
+export const handleUnauthorized = () => {
+    const isSuperAdmin = window.location.pathname.startsWith('/superadmin');
+    const isAdmin = window.location.pathname.startsWith('/admin');
+
+    if (isSuperAdmin) {
+        localStorage.removeItem('superAdminToken');
+        localStorage.removeItem('superAdminUser');
+        window.location.href = '/superadmin/login';
+    } else if (isAdmin) {
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminUser');
+        window.location.href = '/admin/login';
+    }
+};
+
+// Wrapper around fetch that auto-logouts on 401
+export const authFetch = async (url: string, options: RequestInit = {}): Promise<Response> => {
+    const response = await fetch(url, options);
+    if (response.status === 401) {
+        handleUnauthorized();
+    }
+    return response;
+};
+
 export const config = {
     apiBaseUrl: API_BASE_URL,
     endpoints: {

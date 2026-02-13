@@ -27,6 +27,21 @@ const AdminLayout = () => {
         }
     }, [navigate]);
 
+    // Auto-logout on 401 (expired token)
+    useEffect(() => {
+        const originalFetch = window.fetch;
+        window.fetch = async (...args) => {
+            const response = await originalFetch(...args);
+            if (response.status === 401 && window.location.pathname.startsWith('/admin')) {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
+                window.location.href = '/admin/login';
+            }
+            return response;
+        };
+        return () => { window.fetch = originalFetch; };
+    }, []);
+
     // Handle window resize
     useEffect(() => {
         const handleResize = () => {
