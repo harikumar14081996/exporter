@@ -35,7 +35,7 @@ const ImageSlider = () => {
                     {
                         id: 1,
                         title: 'Excellence in Surgical Instruments',
-                        subtitle: 'SR Pharmagical Exporter',
+                        subtitle: 'Shahraj Exporter',
                         description: 'Your trusted partner for premium quality surgical instruments worldwide',
                         cta_text: 'Explore Products',
                         image_url: 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccf?w=1920&q=80',

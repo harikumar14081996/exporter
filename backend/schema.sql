@@ -1,4 +1,4 @@
--- SR Pharmagical Exporter Database Schema
+-- Shahraj Exporter Database Schema
 -- PostgreSQL Database Setup with Seed Data
 
 -- Drop existing tables if they exist
@@ -41,9 +41,9 @@ CREATE TABLE super_admins (
 CREATE TABLE super_admin_settings (
     id SERIAL PRIMARY KEY,
     super_password_hash VARCHAR(255) NOT NULL,
-    website_name VARCHAR(255) DEFAULT 'SR Pharmagical Exporter',
+    website_name VARCHAR(255) DEFAULT 'Shahraj Exporter',
     theme_color VARCHAR(7) DEFAULT '#0066cc',
-    copyright_text VARCHAR(255) DEFAULT 'SR Pharmagical Exporter. All Rights Reserved.',
+    copyright_text VARCHAR(255) DEFAULT 'Shahraj Exporter. All Rights Reserved.',
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -167,7 +167,7 @@ CREATE INDEX idx_quotes_created ON quotes(created_at);
 -- Insert Default Super Admin Settings
 -- Password: SuperAdmin@123 (hashed with bcrypt)
 INSERT INTO super_admin_settings (super_password_hash, website_name, theme_color, copyright_text)
-VALUES ('$2b$10$iz3EzbHcUs9u0PQmUVe5vekb7wo5.GKqcRT2AGpEHrqSe2VmxrQrS', 'SR Pharmagical Exporter', '#0066cc', 'SR Pharmagical Exporter. All Rights Reserved.');
+VALUES ('$2b$10$iz3EzbHcUs9u0PQmUVe5vekb7wo5.GKqcRT2AGpEHrqSe2VmxrQrS', 'Shahraj Exporter', '#0066cc', 'Shahraj Exporter. All Rights Reserved.');
 
 -- Default admin (username: admin, password: admin123)
 INSERT INTO admins (username, password_hash)
@@ -175,7 +175,7 @@ VALUES ('admin', '$2b$10$cVIGESlvPZc0HQiH9bsbBeATaJYxYD.jOB9uYP49PV0Dg.k64aicW')
 
 -- Default super admin (username: superadmin, password: SuperAdmin@123)
 INSERT INTO super_admins (username, password_hash, email)
-VALUES ('superadmin', '$2b$10$xEFZU5dbkXZTJXDjtOuLEOOLzCE67OsoCw7p8NjILoejVyBh73oQe', 'superadmin@srpharmagical.com');
+VALUES ('superadmin', '$2b$10$xEFZU5dbkXZTJXDjtOuLEOOLzCE67OsoCw7p8NjILoejVyBh73oQe', 'superadmin@shahrajexporter.com');
 
 -- Insert Categories (from HomePage.tsx products array)
 INSERT INTO categories (name) VALUES
@@ -183,8 +183,7 @@ INSERT INTO categories (name) VALUES
 ('Surgical Blades'),
 ('Retraction Tools'),
 ('Suturing Equipment'),
-('Hemostatic Instruments'),
-('Orthopedic Tools');
+('Hemostatic Instruments');
 
 -- Insert Products (from HomePage.tsx)
 INSERT INTO products (category_id, name, description, icon, is_active) VALUES
@@ -192,12 +191,11 @@ INSERT INTO products (category_id, name, description, icon, is_active) VALUES
 (2, 'Scalpels & Blades', 'High-grade surgical scalpels and replacement blades. Superior sharpness and control.', '🔪', true),
 (3, 'Retractors & Spreaders', 'Self-retaining and handheld retractors for optimal surgical exposure and access.', '🔧', true),
 (4, 'Needle Holders & Sutures', 'Precision needle holders and surgical suture materials for secure wound closure.', '📌', true),
-(5, 'Clamps & Hemostats', 'Surgical clamps and hemostatic forceps for controlling bleeding and tissue manipulation.', '🔒', true),
-(6, 'Orthopedic Instruments', 'Specialized instruments for orthopedic surgery including bone saws, drills, and fixation tools.', '🦴', true);
+(5, 'Clamps & Hemostats', 'Surgical clamps and hemostatic forceps for controlling bleeding and tissue manipulation.', '🔒', true);
 
 -- Insert Sliders (from ImageSlider.tsx)
 INSERT INTO sliders (title, subtitle, description, image_url, cta_text, position, is_active) VALUES
-('Excellence in Surgical Instruments', 'SR Pharmagical Exporter', 'Your trusted partner for premium quality surgical instruments worldwide', 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccf?w=1920&q=80', 'Explore Products', 1, true),
+('Excellence in Surgical Instruments', 'Shahraj Exporter', 'Your trusted partner for premium quality surgical instruments worldwide', 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccf?w=1920&q=80', 'Explore Products', 1, true),
 ('Precision Engineering for Medical Excellence', 'Medical Grade Quality', 'ISO certified surgical instruments manufactured to the highest international standards', 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1920&q=80', 'Learn More', 2, true),
 ('Global Trust, Local Service', 'Exporting to 70+ Countries', 'Delivering premium surgical instruments to healthcare professionals worldwide', 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1920&q=80', 'Contact Us', 3, true);
 
@@ -231,11 +229,11 @@ INSERT INTO stats_section (label, value, suffix, icon) VALUES
 
 -- Insert About Us Content (from AboutPage.tsx)
 INSERT INTO about_us (content) VALUES
-('{"story": "SR Pharmagical Exporter has been a trusted name in surgical instruments manufacturing and export for years. We combine precision engineering with medical-grade quality standards to deliver instruments that medical professionals worldwide depend on.\n\nOur journey began with a vision to provide healthcare professionals with surgical instruments that meet the highest international standards. Today, we export to over 70 countries and serve thousands of hospitals, clinics, and medical institutions globally.\n\nWe take pride in our commitment to quality, innovation, and customer satisfaction. Every instrument that leaves our facility undergoes rigorous quality control to ensure it meets our exacting standards.", "values": [{"icon": "⚙️", "title": "Precision Engineering", "description": "Advanced manufacturing techniques ensure every instrument meets exact specifications with superior quality."}, {"icon": "✅", "title": "Quality Certified", "description": "ISO 9001, CE marked, and FDA approved products that comply with international medical standards."}, {"icon": "🌍", "title": "Global Presence", "description": "Exporting to 70+ countries with a strong distribution network and satisfied customers worldwide."}, {"icon": "🔬", "title": "Medical Grade Materials", "description": "Premium stainless steel and titanium instruments that ensure durability and sterility."}, {"icon": "🎯", "title": "Customer Focus", "description": "Dedicated to understanding and meeting the unique needs of healthcare professionals."}, {"icon": "🚀", "title": "Continuous Innovation", "description": "Investing in research and development to create next-generation surgical instruments."}], "whyChoose": [{"title": "25+ Years of Experience", "description": "Decades of expertise in surgical instrument manufacturing and global distribution."}, {"title": "5000+ Product Range", "description": "Comprehensive catalog covering all surgical specialties and medical disciplines."}, {"title": "100% Quality Assurance", "description": "Every instrument undergoes multiple quality checks before delivery."}, {"title": "Competitive Pricing", "description": "Best value for premium quality instruments without compromising standards."}, {"title": "Timely Delivery", "description": "Efficient logistics and shipping to ensure your orders arrive on schedule."}, {"title": "Expert Support", "description": "Technical assistance and customer service from knowledgeable professionals."}]}');
+('{"story": "Shahraj Exporter has been a trusted name in surgical instruments manufacturing and export for years. We combine precision engineering with medical-grade quality standards to deliver instruments that medical professionals worldwide depend on.\n\nOur journey began with a vision to provide healthcare professionals with surgical instruments that meet the highest international standards. Today, we export to over 70 countries and serve thousands of hospitals, clinics, and medical institutions globally.\n\nWe take pride in our commitment to quality, innovation, and customer satisfaction. Every instrument that leaves our facility undergoes rigorous quality control to ensure it meets our exacting standards.", "values": [{"icon": "⚙️", "title": "Precision Engineering", "description": "Advanced manufacturing techniques ensure every instrument meets exact specifications with superior quality."}, {"icon": "✅", "title": "Quality Certified", "description": "ISO 9001, CE marked, and FDA approved products that comply with international medical standards."}, {"icon": "🌍", "title": "Global Presence", "description": "Exporting to 70+ countries with a strong distribution network and satisfied customers worldwide."}, {"icon": "🔬", "title": "Medical Grade Materials", "description": "Premium stainless steel and titanium instruments that ensure durability and sterility."}, {"icon": "🎯", "title": "Customer Focus", "description": "Dedicated to understanding and meeting the unique needs of healthcare professionals."}, {"icon": "🚀", "title": "Continuous Innovation", "description": "Investing in research and development to create next-generation surgical instruments."}], "whyChoose": [{"title": "25+ Years of Experience", "description": "Decades of expertise in surgical instrument manufacturing and global distribution."}, {"title": "5000+ Product Range", "description": "Comprehensive catalog covering all surgical specialties and medical disciplines."}, {"title": "100% Quality Assurance", "description": "Every instrument undergoes multiple quality checks before delivery."}, {"title": "Competitive Pricing", "description": "Best value for premium quality instruments without compromising standards."}, {"title": "Timely Delivery", "description": "Efficient logistics and shipping to ensure your orders arrive on schedule."}, {"title": "Expert Support", "description": "Technical assistance and customer service from knowledgeable professionals."}]}');
 
 -- Insert Contact Info (from ContactPage.tsx and Footer.tsx)
 INSERT INTO contact_info (address, phone, email, business_hours) VALUES
-('India', '+91-XXXXXXXXXX', 'info@srpharmagicalexporter.com', 'Monday - Saturday: 9:00 AM - 6:00 PM');
+('India', '+91-XXXXXXXXXX', 'info@shahrajexporter.com', 'Monday - Saturday: 9:00 AM - 6:00 PM');
 
 -- ============================================================================
 -- FUNCTION TO ENFORCE 5 PRODUCT LIMIT PER CATEGORY
@@ -263,6 +261,25 @@ CREATE TRIGGER enforce_product_limit
     BEFORE INSERT ON products
     FOR EACH ROW
     EXECUTE FUNCTION check_products_per_category();
+
+-- Category limit: max 5 categories
+CREATE OR REPLACE FUNCTION check_category_limit()
+RETURNS TRIGGER AS $$
+DECLARE
+    category_count integer;
+BEGIN
+    SELECT COUNT(*) INTO category_count FROM categories;
+    IF category_count >= 5 THEN
+        RAISE EXCEPTION 'Cannot add more than 5 categories';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER enforce_category_limit
+    BEFORE INSERT ON categories
+    FOR EACH ROW
+    EXECUTE FUNCTION check_category_limit();
 
 -- ============================================================================
 -- VERIFICATION QUERIES

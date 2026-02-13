@@ -31,6 +31,22 @@
     gap: 0.5rem;
 }
 
+.sr-logo-badge {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #0066cc, #00a86b);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+}
+
 .navbar-menu {
     display: flex;
     align-items: center;

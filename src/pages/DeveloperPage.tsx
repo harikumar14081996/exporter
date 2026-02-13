@@ -9,7 +9,7 @@ const DeveloperPage = () => {
             <section className="page-hero">
                 <div className="container">
                     <h1 className="page-title">Meet Our Developers</h1>
-                    <p className="page-subtitle">The talented team behind SR Pharmagical Exporter platform</p>
+                    <p className="page-subtitle">The talented team behind Shahraj Exporter platform</p>
                 </div>
             </section>
 
@@ -163,10 +163,10 @@ const DeveloperPage = () => {
                         {/* Developer 2 - Suraj */}
                         <div className="developer-card">
                             <div className="developer-photo">
-                                <img src={SurajImage} alt="Suraj Patel" />
+                                <img src={SurajImage} alt="Suraj Rajput" />
                             </div>
                             <div className="developer-info">
-                                <h2 className="developer-name">Suraj Patel</h2>
+                                <h2 className="developer-name">Suraj Rajput</h2>
                                 <h3 className="developer-role">Software Tester & Designer</h3>
 
                                 <div className="developer-section">
@@ -174,17 +174,14 @@ const DeveloperPage = () => {
                                     <div className="education-item">
                                         <strong>Uka Tarsadia University</strong>
                                         <p>Master of Computer Application, 6.77 CGPA</p>
+                                        <p className="minor-text">Major in Database and Software Testing</p>
                                         <p className="date-text">December 2020</p>
                                     </div>
                                     <div className="education-item">
                                         <strong>Uka Tarsadia University</strong>
                                         <p>Bachelor of Computer Application (Hons), 6.67 CGPA</p>
+                                        <p className="minor-text">Major in Database and VB.NET</p>
                                         <p className="date-text">July 2018</p>
-                                    </div>
-                                    <div className="education-item">
-                                        <strong>Higher Secondary Education</strong>
-                                        <p>Gujarat Board, 43.2%</p>
-                                        <p className="date-text">May 2015</p>
                                     </div>
                                 </div>
 

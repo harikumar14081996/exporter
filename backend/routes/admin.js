@@ -155,15 +155,16 @@ router.post('/products', async (req, res) => {
             return res.status(400).json({ error: 'Category and name are required' });
         }
 
-        // Check product count for this category
+        // Check product count for this category (configurable limit)
+        const appConfig = require('../config/appConfig');
         const countResult = await db.query(
             'SELECT COUNT(*) as count FROM products WHERE category_id = $1 AND is_active = true',
             [category_id]
         );
 
-        if (parseInt(countResult.rows[0].count) >= 5) {
+        if (parseInt(countResult.rows[0].count) >= appConfig.MAX_PRODUCTS_PER_CATEGORY) {
             return res.status(403).json({
-                error: 'Cannot add more than 5 products per category without super admin approval',
+                error: `Cannot add more than ${appConfig.MAX_PRODUCTS_PER_CATEGORY} products per category. Please delete an existing product first.`,
                 limit_reached: true
             });
         }
@@ -258,6 +259,13 @@ router.post('/categories', async (req, res) => {
 
         if (!name) {
             return res.status(400).json({ error: 'Category name is required' });
+        }
+
+        // Check category limit from config
+        const appConfig = require('../config/appConfig');
+        const countResult = await db.query('SELECT COUNT(*) FROM categories');
+        if (parseInt(countResult.rows[0].count) >= appConfig.MAX_CATEGORIES) {
+            return res.status(400).json({ error: `Maximum ${appConfig.MAX_CATEGORIES} categories allowed. Please delete an existing category first.` });
         }
 
         const result = await db.query(

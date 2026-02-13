@@ -1,0 +1,137 @@
+/* Legal Pages - Privacy Policy & Terms */
+.legal-page {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.legal-content {
+    padding: 3rem 0 4rem;
+}
+
+.legal-card {
+    background: white;
+    border-radius: 16px;
+    padding: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.legal-card .effective-date {
+    color: var(--text-secondary, #64748b);
+    font-style: italic;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.legal-card h2 {
+    color: var(--primary, #0066cc);
+    font-size: 1.35rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(0, 102, 204, 0.1);
+}
+
+.legal-card h3 {
+    color: var(--text-dark, #1e293b);
+    font-size: 1.1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.legal-card p {
+    color: var(--text-secondary, #475569);
+    margin-bottom: 1rem;
+}
+
+.legal-card ul {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.legal-card ul li {
+    color: var(--text-secondary, #475569);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.legal-card ul li strong {
+    color: var(--text-dark, #1e293b);
+}
+
+/* Certificates Section Styling (for About Us page) */
+.certificates-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.certificate-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.certificate-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
+}
+
+.cert-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.certificate-card h4 {
+    color: var(--primary, #0066cc);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-card p {
+    color: var(--text-secondary, #64748b);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.cert-upload-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    border: 2px dashed rgba(0, 102, 204, 0.3);
+}
+
+@media (max-width: 768px) {
+    .legal-card {
+        padding: 1.5rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -152,74 +152,8 @@ router.post('/change-password', verifySuperAdminToken, async (req, res) => {
     }
 });
 
-// ============================================================================
-// LEGACY ENDPOINTS (password-based, can be deprecated)
-// ============================================================================
 
-// PUT /api/super-admin/password - Update super admin password (legacy)
-router.put('/password', verifySuperAdmin, async (req, res) => {
-    try {
-        const { newPassword } = req.body;
 
-        if (!newPassword || newPassword.length < 8) {
-            return res.status(400).json({ error: 'Password must be at least 8 characters' });
-        }
-
-        const newPasswordHash = await bcrypt.hash(newPassword, 10);
-
-        await db.query(
-            'UPDATE super_admin_settings SET super_password_hash = $1, updated_at = CURRENT_TIMESTAMP WHERE id = 1',
-            [newPasswordHash]
-        );
-
-        res.json({ message: 'Super admin password updated successfully' });
-    } catch (error) {
-        console.error('Error updating super admin password:', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-// POST /api/super-admin/products - Create product (bypasses 5-product limit)
-router.post('/products', verifySuperAdmin, async (req, res) => {
-    try {
-        const { category_id, name, description, image_url, icon, is_active } = req.body;
-
-        if (!category_id || !name) {
-            return res.status(400).json({ error: 'Category and name are required' });
-        }
-
-        // Disable trigger temporarily to bypass limit
-        const client = await db.pool.connect();
-        try {
-            await client.query('BEGIN');
-            await client.query('ALTER TABLE products DISABLE TRIGGER enforce_product_limit');
-
-            const result = await client.query(
-                `INSERT INTO products (category_id, name, description, image_url, icon, is_active)
-                 VALUES ($1, $2, $3, $4, $5, $6)
-                 RETURNING *`,
-                [category_id, name, description, image_url, icon, is_active !== false]
-            );
-
-            await client.query('ALTER TABLE products ENABLE TRIGGER enforce_product_limit');
-            await client.query('COMMIT');
-
-            res.status(201).json({
-                message: 'Product created with super admin override',
-                product: result.rows[0]
-            });
-        } catch (error) {
-            await client.query('ROLLBACK');
-            await client.query('ALTER TABLE products ENABLE TRIGGER enforce_product_limit');
-            throw error;
-        } finally {
-            client.release();
-        }
-    } catch (error) {
-        console.error('Error creating product (super admin):', error);
-        res.status(500).json({ error: 'Server error' });
-    }
-});
 
 // ============================================================================
 // ADMIN MANAGEMENT (JWT-based authentication)

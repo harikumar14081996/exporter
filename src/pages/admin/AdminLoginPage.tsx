@@ -53,7 +53,7 @@ const AdminLoginPage = () => {
             <div className="admin-login-card">
                 <div className="login-header">
                     <h2>Admin Portal</h2>
-                    <p>SR Pharmagical Exporter</p>
+                    <p>Shahraj Exporter</p>
                 </div>
 
                 {error && <div className="login-error">{error}</div>}

@@ -25,6 +25,8 @@ import AdminManagementPage from './pages/superadmin/AdminManagementPage';
 import SuperAdminChangePasswordPage from './pages/superadmin/ChangePasswordPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import DeveloperPage from './pages/DeveloperPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsPage from './pages/TermsPage';
 import './App.css';
 
 // Helper to darken color for gradients
@@ -100,6 +102,8 @@ function App() {
         <Route path="/category/:categoryId" element={<PublicLayout><CategoryProductsPage /></PublicLayout>} />
         <Route path="/product/:slug" element={<PublicLayout><ProductDetailsPage /></PublicLayout>} />
         <Route path="/developer" element={<PublicLayout><DeveloperPage /></PublicLayout>} />
+        <Route path="/privacy-policy" element={<PublicLayout><PrivacyPolicyPage /></PublicLayout>} />
+        <Route path="/terms" element={<PublicLayout><TermsPage /></PublicLayout>} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLoginPage />} />

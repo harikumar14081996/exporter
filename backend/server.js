@@ -74,7 +74,7 @@ if (require.main === module) {
         console.log(`
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║   🏥 SR Pharmagical Exporter - Backend Server            ║
+║   🏥 Shahraj Exporter - Backend Server                    ║
 ║                                                           ║
 ║   Status: ✅ Running                                      ║
 ║   Port: ${PORT}                                             ║

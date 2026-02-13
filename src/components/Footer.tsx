@@ -31,7 +31,7 @@ const Footer = () => {
                     <div className="footer-grid">
                         {/* Company Info */}
                         <div className="footer-column">
-                            <h3 className="footer-title">{settings?.website_name || 'SR Pharmagical Exporter'}</h3>
+                            <h3 className="footer-title">{settings?.website_name || 'Shahraj Exporter'}</h3>
                             <p className="footer-text">
                                 Your trusted partner for premium quality surgical instruments worldwide.
                                 We specialize in manufacturing and exporting medical-grade surgical tools
@@ -89,7 +89,7 @@ const Footer = () => {
                                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                                     </svg>
-                                    <span>{contact?.email || 'info@srpharmagicalexporter.com'}</span>
+                                    <span>{contact?.email || 'info@shahrajexporter.com'}</span>
                                 </li>
                             </ul>
                         </div>
@@ -102,11 +102,13 @@ const Footer = () => {
                 <div className="container">
                     <div className="footer-bottom-content">
                         <p className="footer-copyright">
-                            © {currentYear} {settings?.copyright_text || 'SR Pharmagical Exporter. All Rights Reserved.'}
+                            © {currentYear} {settings?.copyright_text || 'Shahraj Exporter. All Rights Reserved.'}
                         </p>
                         <div className="footer-links-inline">
                             <Link to="/about">About</Link>
                             <Link to="/contact">Contact</Link>
+                            <Link to="/privacy-policy">Privacy Policy</Link>
+                            <Link to="/terms">Terms & Conditions</Link>
                             <Link to="/developer">Developer</Link>
                         </div>
                     </div>

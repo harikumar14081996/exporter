@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
 import './AboutPage.css';
+import './LegalPages.css';
 
 interface ValueItem {
     icon: string;
@@ -41,7 +42,7 @@ const AboutPage = () => {
                 console.error('Error fetching about content:', error);
                 // Fallback content
                 setContent({
-                    story: "SR Pharmagical Exporter has been a trusted name in surgical instruments manufacturing and export for years. We combine precision engineering with medical-grade quality standards to deliver instruments that medical professionals worldwide depend on.\n\nOur journey began with a vision to provide healthcare professionals with surgical instruments that meet the highest international standards. Today, we export to over 70 countries and serve thousands of hospitals, clinics, and medical institutions globally.",
+                    story: "Shahraj Exporter has been a trusted name in surgical instruments manufacturing and export for years. We combine precision engineering with medical-grade quality standards to deliver instruments that medical professionals worldwide depend on.\n\nOur journey began with a vision to provide healthcare professionals with surgical instruments that meet the highest international standards. Today, we export to over 70 countries and serve thousands of hospitals, clinics, and medical institutions globally.",
                     values: [
                         { icon: "⚙️", title: "Precision Engineering", description: "Advanced manufacturing techniques ensure every instrument meets exact specifications with superior quality." },
                         { icon: "✅", title: "Quality Certified", description: "ISO 9001, CE marked, and FDA approved products that comply with international medical standards." },
@@ -82,7 +83,7 @@ const AboutPage = () => {
             {/* Hero Section */}
             <section className="page-hero">
                 <div className="container">
-                    <h1 className="page-title">About SR Pharmagical Exporter</h1>
+                    <h1 className="page-title">About Shahraj Exporter</h1>
                     <p className="page-subtitle">Leading Manufacturer & Exporter of Premium Surgical Instruments</p>
                 </div>
             </section>
@@ -132,10 +133,47 @@ const AboutPage = () => {
                 </div>
             </section>
 
+            {/* Certificates & Accreditations */}
+            <section className="certificates-section">
+                <div className="container">
+                    <h2 className="section-title">Certificates & Accreditations</h2>
+                    <div className="certificates-grid">
+                        <div className="certificate-card">
+                            <div className="cert-upload-placeholder">
+                                <span className="cert-icon">📜</span>
+                            </div>
+                            <h4>ISO 9001:2015</h4>
+                            <p>Quality Management System certified for surgical instrument manufacturing</p>
+                        </div>
+                        <div className="certificate-card">
+                            <div className="cert-upload-placeholder">
+                                <span className="cert-icon">🇪🇺</span>
+                            </div>
+                            <h4>CE Marking</h4>
+                            <p>European Conformity marking for medical devices and surgical instruments</p>
+                        </div>
+                        <div className="certificate-card">
+                            <div className="cert-upload-placeholder">
+                                <span className="cert-icon">🇺🇸</span>
+                            </div>
+                            <h4>FDA Registered</h4>
+                            <p>Registered with the U.S. Food and Drug Administration for medical device exports</p>
+                        </div>
+                        <div className="certificate-card">
+                            <div className="cert-upload-placeholder">
+                                <span className="cert-icon">🏥</span>
+                            </div>
+                            <h4>WHO GMP</h4>
+                            <p>World Health Organization Good Manufacturing Practices compliance</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Why Choose Us */}
             <section className="why-choose-section">
                 <div className="container">
-                    <h2 className="section-title">Why Choose SR Pharmagical?</h2>
+                    <h2 className="section-title">Why Choose Shahraj?</h2>
                     <div className="why-choose-grid">
                         {content.whyChoose.map((item, index) => (
                             <div key={index} className="why-item">

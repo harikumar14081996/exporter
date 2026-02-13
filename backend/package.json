@@ -1,7 +1,7 @@
 {
     "name": "pharma-backend",
     "version": "1.0.0",
-    "description": "Backend API for SR Pharmagical Exporter",
+    "description": "Backend API for Shahraj Exporter",
     "main": "server.js",
     "type": "commonjs",
     "scripts": {

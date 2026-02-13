@@ -47,7 +47,7 @@ router.get('/sliders', async (req, res) => {
                 {
                     id: 1,
                     title: 'Excellence in Surgical Instruments',
-                    subtitle: 'SR Pharmagical Exporter',
+                    subtitle: 'Shahraj Exporter',
                     description: 'Your trusted partner for premium quality surgical instruments worldwide',
                     image_url: 'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccf?w=1920&q=80',
                     cta_text: 'Explore Products',
@@ -203,9 +203,9 @@ router.get('/settings', async (req, res) => {
 
         if (result.rows.length === 0) {
             return res.json({
-                website_name: 'SR Pharmagical Exporter',
+                website_name: 'Shahraj Exporter',
                 theme_color: '#0066cc',
-                copyright_text: 'SR Pharmagical Exporter. All Rights Reserved.'
+                copyright_text: 'Shahraj Exporter. All Rights Reserved.'
             });
         }
 

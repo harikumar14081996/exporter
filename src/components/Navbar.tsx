@@ -57,24 +57,10 @@ const Navbar = () => {
             <div className="container navbar-container">
                 <Link to="/" className="navbar-logo">
                     <div className="logo-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="18" fill="url(#logo-gradient)" />
-                            <path
-                                d="M20 10v20M10 20h20"
-                                stroke="white"
-                                strokeWidth="3"
-                                strokeLinecap="round"
-                            />
-                            <defs>
-                                <linearGradient id="logo-gradient" x1="0" y1="0" x2="40" y2="40">
-                                    <stop offset="0%" stopColor="#0066cc" />
-                                    <stop offset="100%" stopColor="#00a86b" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
+                        <div className="sr-logo-badge">SR</div>
                     </div>
                     <div className="logo-text">
-                        <span className="logo-name">SR Pharmagical</span>
+                        <span className="logo-name">Shahraj</span>
                         <span className="logo-tagline">Exporter</span>
                     </div>
                 </Link>
